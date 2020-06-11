@@ -46,4 +46,14 @@ module Tools
     end
     org_arr = true
   end
+
+  def my_any?
+    return true unless block_given?
+
+    org_arr = self
+    org_arr.length.times do |i|
+      return true if yield(org_arr[i])
+    end
+    org_arr = false
+  end
 end
