@@ -59,28 +59,6 @@ module Tools
     org_arr = false
   end
 
-  # def my_none?
-  #   org_arr = self
-  #   return true if org_arr.empty?
-
-  #   if block_given?
-  #     org_arr.length.times do |i|
-  #       return false if yield(org_arr[i])
-
-  #       break
-  #     end
-  #   else
-  #     org_arr.length.times do |i|
-  #       if org_arr[i] == false || org_arr[i].nil?
-  #         true
-  #       elsif org_arr[i]
-  #         return false
-  #       end
-  #     end
-  #   end
-  #   org_arr = false
-  # end
-
   def my_none?
     org_arr = self
     result = true
@@ -91,5 +69,14 @@ module Tools
       return result
     end
     true
+  end
+
+  def my_count
+    org_arr = self
+    return org_arr.length unless block_given?
+
+    counter = 0
+    org_arr.my_each { |i| counter += 1 if yield(i) }
+    counter
   end
 end

@@ -6,7 +6,7 @@ my_array = [2, 3, 4, 5]
 # p my_array.my_select { |value| p value.odd? }
 # p my_array.my_all? { |value| p value > 3 }
 # p my_array.my_any? { |value| p value > 6}
+# p my_array.my_none? { |value| p value > 6 }
+# p my_array.my_count { |value| p value > 3 }
 
-p my_array.my_none? { |value| p value > 6 }
-puts "hello world"
-p my_array.none? { |value| p value > 6 }
+
