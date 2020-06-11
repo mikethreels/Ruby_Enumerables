@@ -79,4 +79,14 @@ module Tools
     org_arr.my_each { |i| counter += 1 if yield(i) }
     counter
   end
+
+  def my_map
+    return to_enum(:my_map) unless block_given?
+
+    org_arr = self
+    new_arr = []
+
+    org_arr.my_each { |i| new_arr << yield(i) }
+    new_arr
+  end
 end
