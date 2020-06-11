@@ -2,7 +2,6 @@
 
 # rubocop:disable Style/CaseEquality
 
-
 # This module copies the Enumerable Module embedded with Ruby
 module Tools
   def my_each
@@ -50,27 +49,47 @@ module Tools
     org_arr = true
   end
 
-  def my_none?
+  def my_any?
+    return true unless block_given?
+
     org_arr = self
-    return true if org_arr.empty?
-
-    if block_given?
-      org_arr.length.times do |i|
-        return true unless yield(org_arr[i])
-
-        break
-      end
-    else
-      org_arr.length.times do |i|
-        if org_arr[i] == false || org_arr[i].nil?
-          true
-        elsif org_arr[i]
-          return false
-        end
-      end
+    org_arr.length.times do |i|
+      return true if yield(org_arr[i])
     end
     org_arr = false
   end
-end
 
-# rubocop:enable Style/CaseEquality
+  # def my_none?
+  #   org_arr = self
+  #   return true if org_arr.empty?
+
+  #   if block_given?
+  #     org_arr.length.times do |i|
+  #       return false if yield(org_arr[i])
+
+  #       break
+  #     end
+  #   else
+  #     org_arr.length.times do |i|
+  #       if org_arr[i] == false || org_arr[i].nil?
+  #         true
+  #       elsif org_arr[i]
+  #         return false
+  #       end
+  #     end
+  #   end
+  #   org_arr = false
+  # end
+
+  def my_none?
+    org_arr = self
+    result = true
+    if block_given?
+      org_arr.my_each { |i| return false if yield(i) }
+    else
+      org_arr.my_each { |i| result = false if i == true || (i.is_a? Integer) }
+      return result
+    end
+    true
+  end
+end
