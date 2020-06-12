@@ -20,7 +20,9 @@
 
 ## Live Demo
 
-[![Run on Repl.it](https://repl.it/join/memrcfoq-michaelthreels)]
+click this link to [Run on Repl.it](https://repl.it/join/memrcfoq-michaelthreels)
+
+
 
 ## Authors
 
