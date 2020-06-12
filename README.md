@@ -1,6 +1,17 @@
 # Advanced Building Blocks - Bubble Sort
 
-> In this project, we implemented the [bubble sort algorithm](https://en.wikipedia.org/wiki/Bubble_sort). Assignment is focused on the use of yield and passing a block to a method.
+> In this project, we implemented our own version of Ruby’s enumerable methods. 
+- Create #my_each
+- Create #my_each_with_index 
+- Create #my_select 
+- Create #my_all?
+- Create #my_any?
+- Create #my_none?
+- Create #my_count
+- Create #my_map
+- Create #my_inject
+- Create #multiply_els to test #my_inject
+- Modify your #my_map method to take either a proc or a block.
 
 ## Built With
 
@@ -9,7 +20,7 @@
 
 ## Live Demo
 
-Follow this [Live Demo Link](https://repl.it/join/mftfubmu-bismarckgm) to Run the code on Repl.it
+[![Run on Repl.it](https://repl.it/join/memrcfoq-michaelthreels)]
 
 ## Authors
 
