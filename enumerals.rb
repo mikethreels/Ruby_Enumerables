@@ -90,27 +90,21 @@ module Tools
     new_arr
   end
 
-  def my_inject(arg, sym = nil)
-    array = self.unshift(arg)
+  # rubocop:disable Metrics/CyclomaticComplexity, Metrics/AbcSize, Metrics/PerceivedComplexity
+
+  def my_inject(arg = nil, sym = nil)
+    org_arr = self
+    array = arg.nil? ? org_arr : org_arr.unshift(arg)
     return nil if array.empty?
-    return array[0] if array.length == 1
 
-    if sym == nil && block_given?
-      result = array[0]
-      array.my_each { |i| result = yield(result, i) }
-      result
-    end
-    if sym != nil
-      new_arr = array[0]
-      array.my_each { |i| new_arr = new_arr.method(sym).call(i) }
-      new_arr
-    end
+    result = array[0]
+    array.my_each { |i| result = yield(result, i) } if sym.nil? && !arg.nil? && block_given?
+
+    array[1..-1].my_each { |i| result = yield(result, i) } if sym.nil? && arg.nil? && block_given?
+
+    array.my_each { |i| result = result.method(sym).call(i) } unless sym.nil?
+    result
   end
-
-
-  # def my_inject(*arg)
-  #   org_arr = arg + self
-  #   return nil if org_arr
-  # end
-
+  # rubocop:enable Metrics/CyclomaticComplexity, Metrics/AbcSize, Metrics/PerceivedComplexity
 end
+# rubocop:enable Style/CaseEquality
