@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-# rubocop:disable Style/CaseEquality
-
 # This module copies the Enumerable Module embedded with Ruby
 module Tools
   def my_each
@@ -80,19 +78,24 @@ module Tools
     counter
   end
 
-  def my_map
-    return to_enum(:my_map) unless block_given?
-
+  def my_map(arg = nil)
     org_arr = self
     new_arr = []
 
-    org_arr.my_each { |i| new_arr << yield(i) }
+    return to_enum(:my_map) if !block_given? && arg.nil?
+
+    org_arr.my_each { |i| new_arr << arg.call(i) } unless arg.nil?
+
+    org_arr.my_each { |i| new_arr << yield(i) } if arg.nil? && block_given?
+
     new_arr
   end
 
   # rubocop:disable Metrics/CyclomaticComplexity, Metrics/AbcSize, Metrics/PerceivedComplexity
 
   def my_inject(arg = nil, sym = nil)
+    # rubocop:enable Metrics/CyclomaticComplexity, Metrics/AbcSize, Metrics/PerceivedComplexity
+
     org_arr = self
     array = arg.nil? ? org_arr : org_arr.unshift(arg)
     return nil if array.empty?
@@ -105,6 +108,9 @@ module Tools
     array.my_each { |i| result = result.method(sym).call(i) } unless sym.nil?
     result
   end
-  # rubocop:enable Metrics/CyclomaticComplexity, Metrics/AbcSize, Metrics/PerceivedComplexity
+
+  def multiply_els
+    array = self
+    array.my_inject { |i, a| i * a }
+  end
 end
-# rubocop:enable Style/CaseEquality
