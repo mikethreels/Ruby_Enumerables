@@ -1,7 +1,4 @@
-# frozen_string_literal: true
-
-# This module copies the Enumerable Module embedded with Ruby
-module Tools
+module Enumerable
   def my_each
     return to_enum(:my_each) unless block_given?
 
