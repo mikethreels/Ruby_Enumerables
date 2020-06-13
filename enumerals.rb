@@ -1,14 +1,13 @@
 module Enumerable
   def my_each
-    return to_enum(:my_each) unless block_given?
-
-    org_arr = self
-    arr = []
-    org_arr.length.times do |i|
-      yield(org_arr[i])
-      arr << org_arr[i]
+    if block_given? #If 'self' has block {||}
+      size.times do |i| # Takes size of "self" (variable, array, hash, etc) that the method was invoqued. And loops (times) 'size' times. i = each number of loops
+        yield(to_a[i]) # Executes the block everytime it's called and place inside of an array every value of i.
+      end
     end
-    arr
+
+    block_given? ? self : enum_for(__method__) # Return command. If block was given return "self" (variable, array, etc). Else, return Enumerator method name (in this case "my_each")
+
   end
 
   def my_each_with_index
