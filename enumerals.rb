@@ -1,7 +1,7 @@
 module Enumerable
   def my_each
     if block_given? #If 'self' has block {||}
-      size.times do |i| # Takes size of "self" (variable, array, hash, etc) that the method was invoqued. And loops (times) 'size' times. i = each number of loops
+      size.times do |i| # Takes size of "self" (variable, array, hash, etc) that the method has invoqued. And loops (times) 'size' times. i = each number of loops
         yield(to_a[i]) # Executes the block everytime it's called and place inside of an array every value of i.
       end
     end

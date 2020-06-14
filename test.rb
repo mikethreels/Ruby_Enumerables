@@ -8,7 +8,8 @@ res = []
 # p my_array.my_each
 p(my_array.my_each { |value| p value + 1 })
 # p(my_hash.my_each { |value| value + 1 })
-p(my_array.each { |value| p value + 1 })
+p [1..5].each { |value| p value }
+p [1..5].my_each { |value| p value }
 # p my_hash.each { |x| p res << x[1] }
 # p (1..5).each { |x| res << x }
 # p my_array.each
