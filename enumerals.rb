@@ -1,4 +1,5 @@
 module Enumerable
+
   def my_each
     return to_enum(__method__) unless block_given?
 
@@ -28,14 +29,21 @@ module Enumerable
     arr
   end
 
-  def my_all?
-    return true unless block_given?
-
-    org_arr = self
-    org_arr.length.times do |i|
-      return false unless yield(org_arr[i])
+  def my_all?(arg = nil)
+    puts "#{__FILE__}:#{__LINE__}: warning: given block not used" if arg && block_given?
+    if arg
+      return check_arg(arg)
+    elsif !block_given?
+      size.times do |i|
+        return false if to_a[i] == false || to_a[i].nil?
+      end
+      return true
+    else
+      my_each do |i|
+        return false unless yield(i)
+      end
+      true
     end
-    org_arr = true
   end
 
   def my_any?
@@ -104,4 +112,19 @@ module Enumerable
     array = self
     array.my_inject { |i, a| i * a }
   end
+
+  def check_arg(arg)
+    if arg.is_a? (Regexp)
+      each do |i|
+        return false if (i =~ arg).nil?
+      end
+      return true
+    elsif arg 
+      each do |i|
+        return false if !(i.is_a? (arg))
+      end
+      return true
+    end
+  end
+
 end
