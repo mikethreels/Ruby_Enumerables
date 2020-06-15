@@ -25,7 +25,7 @@ module Enumerable
 
   def my_all?(arg = nil)
     puts "#{__FILE__}:#{__LINE__}: warning: given block not used" if arg && block_given?
-    check_arg(arg) if arg
+    return check_arg(arg) if arg
 
     if !block_given?
       size.times { |i| return false if to_a[i] == false || to_a[i].nil? }
@@ -37,7 +37,7 @@ module Enumerable
 
   def my_any?(arg = nil)
     puts "#{__FILE__}:#{__LINE__}: warning: given block not used" if arg && block_given?
-    check_any_arg(arg) if arg
+    return check_any_arg(arg) if arg
 
     if !block_given?
       my_each { |i| return true if i }
