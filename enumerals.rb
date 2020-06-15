@@ -4,18 +4,14 @@ module Enumerable
   def my_each
     return to_enum(__method__) unless block_given?
 
-    size.times do |i|
-      yield(to_a[i])
-    end
+    size.times { |i| yield(to_a[i]) }
     self
   end
 
   def my_each_with_index
     return to_enum(__method__) unless block_given?
 
-    size.times do |i|
-      yield(to_a[i], i)
-    end
+    size.times { |i| yield(to_a[i], i) }
     self
   end
 
@@ -78,7 +74,6 @@ module Enumerable
   end
 
   def my_map(arg = nil)
-    puts "#{__FILE__}:#{__LINE__}: warning: given block not used" if arg && block_given?
     new_arr = []
 
     return to_enum(:my_map) if !block_given? && arg.nil?
