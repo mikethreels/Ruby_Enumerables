@@ -1,35 +1,29 @@
 module Enumerable
   def my_each
-    return to_enum(:my_each) unless block_given?
+    return to_enum(__method__) unless block_given?
 
-    org_arr = self
-    arr = []
-    org_arr.length.times do |i|
-      yield(org_arr[i])
-      arr << org_arr[i]
+    size.times do |i|
+      yield(to_a[i])
     end
-    arr
+    self
   end
 
   def my_each_with_index
-    return to_enum(:my_each_with_index) unless block_given?
+    return to_enum(__method__) unless block_given?
 
-    org_arr = self
-    arr = []
-    org_arr.length.times do |i|
-      yield(org_arr[i], i)
-      arr << org_arr[i]
+    size.times do |i|
+      yield(to_a[i], i)
+
     end
-    arr
+    self
   end
 
   def my_select
-    return to_enum(:my_select) unless block_given?
+    return to_enum(__method__) unless block_given?
 
-    org_arr = self
     arr = []
-    org_arr.length.times do |i|
-      arr << org_arr[i] if yield(org_arr[i])
+    size.times do |i|
+      arr << to_a[i] if yield(to_a[i])
     end
     arr
   end
