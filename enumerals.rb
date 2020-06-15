@@ -46,14 +46,21 @@ module Enumerable
     end
   end
 
-  def my_any?
-    return true unless block_given?
-
-    org_arr = self
-    org_arr.length.times do |i|
-      return true if yield(org_arr[i])
+  def my_any?(arg = nil)
+    puts "#{__FILE__}:#{__LINE__}: warning: given block not used" if arg && block_given?
+    if arg
+      return check_any_arg(arg)
+    elsif !block_given?
+      my_each do |i|
+        return true if i
+      end
+      return false
+    else
+      my_each do |i|
+        return true if yield(i)
+      end
+      false
     end
-    org_arr = false
   end
 
   def my_none?
@@ -115,15 +122,29 @@ module Enumerable
 
   def check_arg(arg)
     if arg.is_a? (Regexp)
-      each do |i|
+      my_each do |i|
         return false if (i =~ arg).nil?
       end
       return true
     elsif arg 
-      each do |i|
+      my_each do |i|
         return false if !(i.is_a? (arg))
       end
       return true
+    end
+  end
+
+  def check_any_arg(arg)
+    if arg.is_a? (Regexp)
+      my_each do |i|
+        return true if !(i =~ arg).nil?
+      end
+      return false
+    elsif arg 
+      my_each do |i|
+        return true if (i.is_a? (arg))
+      end
+      return false
     end
   end
 

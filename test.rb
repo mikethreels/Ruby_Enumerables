@@ -25,6 +25,13 @@ my_text = %w[ant bear cat]
 # p(my_text.my_all?(/t/) { |value| value >= 2 })
 
 
+# p my_text.my_any?(/t/)
+# p my_array.my_any?(Numeric)
+# p my_array.my_any?
+p(my_array.my_any? { |value| value > 10 })
+p(my_text.my_any?(/t/) { |value| value >= 2 })
+
+
 # p(my_array.my_any? { |value| value > 6 })
 # p(my_array.my_none? { |value| value > 6 })
 # p(my_array.my_count { |value| value > 3 })
