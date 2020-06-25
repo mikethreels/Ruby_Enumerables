@@ -139,4 +139,28 @@ describe Enumerable do
       expect(arr_string.my_none?).to eql(true)
     end
   end
+
+  describe '#my_count' do
+    context 'when a block is given' do
+      it 'returns an int with the number of elements which pass the condition (numbers)' do
+        expect(arr_num.my_count { |x| (x % 2).zero? }).to eql(arr_num.count { |x| (x % 2).zero? })
+      end
+
+      it 'returns an int with the number of elements which pass the condition (range)' do
+        expect(ran.my_count { |x| (x % 2).zero? }).to eql(ran.count { |x| (x % 2).zero? })
+      end
+
+      it 'if argument is also given returns an int with the number of elements which are equal to the argument(numbers)' do
+        expect(arr_num.my_count(2) { |value| value }).to eql(arr_num.count(2) { |value| value })
+      end
+    end
+
+    it 'if only an argument is given returns an int with the number of elements which are equal to the argument(numbers)' do
+      expect(arr_num.my_count(2)).to eql(arr_num.count(2))
+    end
+
+    it 'when no block is given returns the size of the array' do
+      expect(arr_string.my_count).to eql(arr_string.count)
+    end
+  end
 end
