@@ -9,7 +9,7 @@ my_text = %w[ant bear cat]
 # p(my_array.my_each { |value| p value })
 # p(my_hash.my_each { |value| p value })
 # p((1..10).my_each { |value| p value })
-# p my_array
+# p my_array.my_each
 
 # puts '---------------------------my_each_with_index'
 # p(my_array.my_each_with_index { |value, i| puts value, i })
