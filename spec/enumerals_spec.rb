@@ -45,4 +45,44 @@ describe Enumerable do
       expect(arr_num.my_each_with_index).to be_an Enumerator
     end
   end
+
+  describe '#my_select' do
+    context 'when the method is called using a block' do
+      it 'returns an array with the elements which pass the condition' do
+        expect(arr_num.my_select { |value| value > 3 }).to eql(arr_num.select { |value| value > 3 })
+      end
+
+      it 'returns an array with the elements which pass the condition' do
+        expect(ran.my_select { |value| value > 3 }).to eql(ran.select { |value| value > 3 })
+      end
+    end
+
+    it 'when no block given it returns an enumerator' do
+      expect(arr_num.my_select).to be_an Enumerator
+    end
+  end
+
+  describe '#my_all' do
+    context 'when the method is called using an argument' do
+      it 'returns a true value if all elements pass the condition' do
+        expect(arr_string.my_all?(/t/)).to eql(false)
+      end
+
+      it 'returns a true value if all elements pass the condition' do
+        expect(arr_num.my_all?(Numeric)).to eql(true)
+      end
+
+      it 'returns a true value if all elements pass the condition' do
+        expect(arr_string.my_all?).to eql(true)
+      end
+    end
+
+    it 'when the method is called using a block returns a true value if all elements pass the condition' do
+      expect(arr_num.my_all? { |value| value >= 2 }).to eql(false)
+    end
+
+    it 'when the method is called using a block and a arg returns a true value if all elements pass the condition from the arg' do
+      expect(arr_string.my_all?(/t/) { |value| value >= 2 }).to eql(false)
+    end
+  end
 end
