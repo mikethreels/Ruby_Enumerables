@@ -64,25 +64,79 @@ describe Enumerable do
 
   describe '#my_all' do
     context 'when the method is called using an argument' do
-      it 'returns a true value if all elements pass the condition' do
+      it 'returns a true value if all elements pass the condition (strings)' do
         expect(arr_string.my_all?(/t/)).to eql(false)
       end
 
-      it 'returns a true value if all elements pass the condition' do
+      it 'returns a true value if all elements pass the condition (numbers)' do
         expect(arr_num.my_all?(Numeric)).to eql(true)
       end
+    end
 
-      it 'returns a true value if all elements pass the condition' do
-        expect(arr_string.my_all?).to eql(true)
+    context 'when a block is given' do
+      it 'the method returns a true value if all elements pass the condition (numbers)' do
+        expect(arr_num.my_all? { |value| value >= 2 }).to eql(false)
+      end
+
+      it 'when an arg is also given returns a true value if all elements pass the condition from the arg (string)' do
+        expect(arr_string.my_all?(/t/) { |value| value >= 2 }).to eql(false)
       end
     end
 
-    it 'when the method is called using a block returns a true value if all elements pass the condition' do
-      expect(arr_num.my_all? { |value| value >= 2 }).to eql(false)
+    it 'when no block is given ruby adds implicit block: { |e| e }' do
+      expect(arr_string.my_all?).to eql(true)
+    end
+  end
+
+  describe '#my_any?' do
+    context 'when an argument is given' do
+      it 'returns true if any value passes the condition otherwise returns false (strings)' do
+        expect(arr_string.my_any?(/t/)).to eql(true)
+      end
+
+      it 'returns a true value if all elements pass the condition (numbers)' do
+        expect(arr_num.my_any?(Numeric)).to eql(true)
+      end
     end
 
-    it 'when the method is called using a block and a arg returns a true value if all elements pass the condition from the arg' do
-      expect(arr_string.my_all?(/t/) { |value| value >= 2 }).to eql(false)
+    context 'when a block is given' do
+      it 'the method returns true when any value passes the condition ortherwise returns false (numbers)' do
+        expect(arr_num.my_any? { |value| value == 10 }).to eql(false)
+      end
+
+      it 'if an argument is also given the method return true if any value passes the condition in the argument (strings)' do
+        expect(arr_string.my_any?(/t/) { |value| value >= 2 }).to eql(true)
+      end
+    end
+
+    it 'when no block is given ruby adds implicit block: { |e| e }' do
+      expect(arr_string.my_any?).to eql(true)
+    end
+  end
+
+  describe '#my_none?' do
+    context 'when the method is called using an argument' do
+      it 'returns a true value if none of the elements pass the condition (strings)' do
+        expect(arr_string.my_none?(/t/)).to eql(false)
+      end
+
+      it 'returns a true value if none of the elements pass the condition (numbers)' do
+        expect(arr_num.my_none?(Numeric)).to eql(false)
+      end
+    end
+
+    context 'when a block is given' do
+      it 'the method returns a true value if none of the elements pass the condition (numbers)' do
+        expect(arr_num.my_none? { |value| value >= 2 }).to eql(false)
+      end
+
+      it 'when an arg is also given returns a true value if none of the elements pass the condition from the arg (string)' do
+        expect(arr_string.my_none?(/z/) { |value| value >= 2 }).to eql(true)
+      end
+    end
+
+    it 'when no block is given returns true if none of the colection members is true' do
+      expect(arr_string.my_none?).to eql(true)
     end
   end
 end
