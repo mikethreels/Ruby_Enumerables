@@ -5,6 +5,7 @@ describe Enumerable do
   let(:arr_string) { %w[ant bear cat] }
   let(:has_num) { { a: 1, b: 2 } }
   let(:ran) { (1..5) }
+  let(:arg) { proc { |x| x**2 } }
 
   describe '#my_each' do
     context 'when the method is called using a block' do
@@ -161,6 +162,50 @@ describe Enumerable do
 
     it 'when no block is given returns the size of the array' do
       expect(arr_string.my_count).to eql(arr_string.count)
+    end
+  end
+
+  describe '#my_map' do
+    context 'when a block is given' do
+      it 'returns the given array with the modified elements (numbers)' do
+        expect(arr_num.my_map { |value| value * 2 }).to eql(arr_num.map { |value| value * 2 })
+      end
+
+      it 'returns the given range as array with the modified elements (range)' do
+        expect(ran.my_map { |value| value * 2 }).to eql(ran.map { |value| value * 2 })
+      end
+    end
+
+    it 'returns the given array with the modified elements using a proc(numbers)' do
+      expect(ran.my_map(&arg)).to eql(ran.map(&arg))
+    end
+
+    it 'returns an enumerator if no block or argument given' do
+      expect(ran.my_map).to be_an Enumerator
+    end
+  end
+
+  describe '#my_inject' do
+    context 'when a block is given' do
+      it 'Combines all elements of array by applying a binary operation, specified by a block (numbers)' do
+        expect(arr_num.my_inject { |value| value * 2 }).to eql(arr_num.inject { |value| value * 2 })
+      end
+
+      it 'Combines all elements of range by applying a binary operation, specified by a block (range)' do
+        expect(ran.my_inject { |value| value * 2 }).to eql(ran.inject { |value| value * 2 })
+      end
+    end
+
+    it 'if argument is also given add arg to beginning of array and run as usual with block given' do
+      expect(ran.my_inject(1) { |product, n| product * n }).to eql(ran.inject(1) { |product, n| product * n })
+    end
+
+    it 'returns the longest string inside an array' do
+      expect(arr_string.my_inject do |memo, word|
+               memo.length > word.length ? memo : word
+             end).to eql(arr_string.inject do |memo, word|
+                           memo.length > word.length ? memo : word
+                         end)
     end
   end
 end

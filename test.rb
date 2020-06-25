@@ -56,7 +56,7 @@ require_relative 'enumerals.rb'
 # puts '---------------------------my_map'
 # p(my_array.my_map { |value| value * 2 })
 # p((1..4).my_map { |i| i * i })
-# p(my_array.my_map(arg) { |value| value * 2 })
+# p(my_array.my_map(&arg) { |value| value * 2 })
 
 # puts '---------------------------my_inject'
 # p(my_array.my_inject { |value| value * 2 })
