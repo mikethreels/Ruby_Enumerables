@@ -1,9 +1,9 @@
 require_relative 'enumerals.rb'
 
-my_array = [5, 4, 3, 2, 1]
-arg = proc { |x| x**2 }
-my_hash = { a: 1, b: 2 }
-my_text = %w[ant bear cat]
+# my_array = [5, 4, 3, 2, 1]
+# arg = proc { |x| x**2 }
+# my_hash = { a: 1, b: 2 }
+# my_text = %w[ant bear cat]
 
 # puts '---------------------------my_each'
 # p(my_array.my_each { |value| p value })
@@ -24,7 +24,7 @@ my_text = %w[ant bear cat]
 # puts '---------------------------my_all?'
 # p(my_text.my_all?(/t/))
 # p(my_array.my_all?(Numeric))
-# p(my_array.my_all?) 
+# p(my_array.my_all?)
 # p(my_array.my_all? { |value| value >= 2 })
 # p(my_text.my_all?(/t/) { |value| value >= 2 })
 
@@ -48,7 +48,7 @@ my_text = %w[ant bear cat]
 
 # puts '---------------------------my_count'
 # p(my_array.my_count)
-p(my_array.my_count(2))
+# p(my_array.my_count(2))
 # p(my_array.my_count { |x| (x % 2).zero? })
 # p(my_array.my_count(2) { |value| value })
 # p((1..10).my_count { |x| (x % 2).zero? })
@@ -59,7 +59,7 @@ p(my_array.my_count(2))
 # p(my_array.my_map(arg) { |value| value * 2 })
 
 # puts '---------------------------my_inject'
-p(my_array.my_inject { |value| value * 2 })
+# p(my_array.my_inject { |value| value * 2 })
 # p((5..10).my_inject { |sum, n| sum + n })
 # p((5..10).my_inject(1, :*))
 # p((5..10).my_inject(1) { |product, n| product * n })
@@ -68,7 +68,7 @@ p(my_array.my_inject { |value| value * 2 })
 # end
 # p longest
 
-p my_array
+# p my_array
 
 # puts '---------------------------multiply_els'
 
