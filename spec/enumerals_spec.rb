@@ -9,15 +9,15 @@ describe Enumerable do
   describe "#my_each" do
 
     it "runs block for each element in the variable, passing it as an argument and returning an array" do
-      expect(arr_num.my_each { |i| i }).to eql(arr_num.my_each { |i| i })
+      expect(arr_num.my_each { |i| i }).to eql(arr_num.each { |i| i })
     end
 
     it "runs block for each element in the hash, passing it as an argument and returning an hash" do
-      expect(has_num.my_each { |i| i }).to eql(has_num.my_each { |i| i })
+      expect(has_num.my_each { |i| i }).to eql(has_num.each { |i| i })
     end
 
     it "runs block for each element in the range, passing it as an argument and returning an range" do
-      expect(ran.my_each { |i| i }).to eql(ran.my_each { |i| i })
+      expect(ran.my_each { |i| i }).to eql(ran.each { |i| i })
     end
 
     it "When called without a block, it should return the Enumerator" do
